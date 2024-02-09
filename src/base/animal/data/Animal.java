@@ -1,6 +1,6 @@
 package base.animal.data;
 
-public class Animal {
+public class Animal implements Comparable<Animal> {
     private int id;
     private String name;
     private String type;
@@ -94,11 +94,16 @@ public class Animal {
 
     @Override
     public String toString() {
-        return String.format(" %-10s | %-10s | %-10s | %-5s |",
+        return String.format(" \n\t\t\t\t\t\t%-10s | %-10s | %-11s | %-5s |\n",
             name,
             type,
             description,
             age
         );
+    }
+
+    @Override
+    public int compareTo(Animal o) {
+        return this.name.compareTo(o.name);
     }
 }

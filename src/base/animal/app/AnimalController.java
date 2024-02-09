@@ -1,11 +1,9 @@
 package base.animal.app;
 
 import base.animal.data.Animal;
+import base.animal.data.AnimalNameComparator;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class AnimalController {
     private Map<Integer, Animal> idToAnimal;
@@ -39,12 +37,41 @@ public class AnimalController {
     }
 
     public List<Animal> getAllAnimals() {
-        List<Animal> allAnimals = new ArrayList<>();
+        List<Animal> allAnimals = new ArrayList<>(idToAnimal.values());
 
-        for(Animal animal : idToAnimal.values()) {
-            allAnimals.add(animal);
-            System.out.println("Added animal: " + animal.getName() + " to the array");
-        }
+//        for(Animal animal : idToAnimal.values()) {
+//            allAnimals.add(animal);
+//            System.out.println("Added animal: " + animal.getName() + " to the array");
+//        }
+
+//        allAnimals.addAll(idToAnimal.values());
+
+        return allAnimals;
+    }
+
+    public Set<Animal> getAllAnimalsSorted() {
+        System.out.println(String.format("\t\t\t\t\t\t%-10s | %-10s | %s | %-5s |",
+                "NAME",
+                "TYPE",
+                "DESCRIPTION",
+                "AGE"
+                ));
+        Set<Animal> animalsSorted= new TreeSet<Animal>(idToAnimal.values());
+
+        return animalsSorted;
+    }
+
+    public List<Animal> getAllAnimalsSorted(Comparator<Animal> comparator) {
+        System.out.println(String.format("\t\t\t\t\t\t%-10s | %-10s | %s | %-5s |",
+                "NAME",
+                "TYPE",
+                "DESCRIPTION",
+                "AGE"
+        ));
+
+        List<Animal> allAnimals = new ArrayList<>(idToAnimal.values());
+
+        allAnimals.sort(comparator);
 
         return allAnimals;
     }
